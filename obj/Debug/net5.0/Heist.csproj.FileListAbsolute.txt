@@ -1,0 +1,16 @@
+C:\Users\bshov\workspace\Heist\bin\Debug\net5.0\Heist.exe
+C:\Users\bshov\workspace\Heist\bin\Debug\net5.0\Heist.deps.json
+C:\Users\bshov\workspace\Heist\bin\Debug\net5.0\Heist.runtimeconfig.json
+C:\Users\bshov\workspace\Heist\bin\Debug\net5.0\Heist.runtimeconfig.dev.json
+C:\Users\bshov\workspace\Heist\bin\Debug\net5.0\Heist.dll
+C:\Users\bshov\workspace\Heist\bin\Debug\net5.0\ref\Heist.dll
+C:\Users\bshov\workspace\Heist\bin\Debug\net5.0\Heist.pdb
+C:\Users\bshov\workspace\Heist\obj\Debug\net5.0\Heist.csprojAssemblyReference.cache
+C:\Users\bshov\workspace\Heist\obj\Debug\net5.0\Heist.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\bshov\workspace\Heist\obj\Debug\net5.0\Heist.AssemblyInfoInputs.cache
+C:\Users\bshov\workspace\Heist\obj\Debug\net5.0\Heist.AssemblyInfo.cs
+C:\Users\bshov\workspace\Heist\obj\Debug\net5.0\Heist.csproj.CoreCompileInputs.cache
+C:\Users\bshov\workspace\Heist\obj\Debug\net5.0\Heist.dll
+C:\Users\bshov\workspace\Heist\obj\Debug\net5.0\ref\Heist.dll
+C:\Users\bshov\workspace\Heist\obj\Debug\net5.0\Heist.pdb
+C:\Users\bshov\workspace\Heist\obj\Debug\net5.0\Heist.genruntimeconfig.cache
