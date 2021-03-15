@@ -5,10 +5,35 @@ namespace Heist
 {
     class Program
     {
-        static void Main(string[] args)
+        static void Main()
         {
 
             Team HeistTeam = new Team();
+            int Diff = 0;
+
+            Console.WriteLine("Choose your difficulty");
+            Console.WriteLine("[1] Cake Walk, [2] A Little Sweat, [3] Shouldn't Try This, [4] Daniel Ocean Wouldn't Even Think About It");
+            int playerInput = Int32.Parse(Console.ReadLine());
+            if (playerInput == 1)
+            {
+                Diff = 50;
+            }
+            else if (playerInput == 2)
+            {
+                Diff = 100;
+            }
+            else if (playerInput == 3)
+            {
+                Diff = 150;
+            }
+            else if (playerInput == 4)
+            {
+                Diff = 500;
+            }
+            else
+            {
+                Main();
+            }
 
             Console.WriteLine("Plan your heist!");
             Console.WriteLine();
@@ -57,54 +82,53 @@ namespace Heist
                     Member member = new Member(name, skill, returnedCourage);
                     HeistTeam.AddMember(member);
 
-                    // Console.WriteLine(name);
-                    // Console.WriteLine(MemberSkill);
-                    // Console.WriteLine(courageFactor);
 
-
-                    // Console.WriteLine("----------------------------");
-                    // Console.WriteLine("");
-                    // Console.WriteLine("Your Team Roster");
-
-                    // Console.WriteLine($"Total team members: {HeistTeam.Members.Count}");
-
-                    // foreach (Member m in HeistTeam.Members)
-                    // {
-                    //     Console.WriteLine("----------------------------");
-                    //     Console.WriteLine($"{m.Name}   ");
-                    //     Console.WriteLine($"Skill level: {m.Skill}");
-                    //     Console.WriteLine($"Courage level: {m.Courage}");
-                    //     Console.WriteLine("");
-                    // }
                 }
             }
-            int BankDiffLevel = 100;
-            Random Luck = new Random();
-            int teamLuck = Luck.Next(-10, 10);
-            BankDiffLevel = 100 + teamLuck;
+            Console.Clear();
+            Console.WriteLine("How many banks you looking to rob today?");
+            int trials = Int32.Parse(Console.ReadLine());
+            int success = 0;
 
-            int teamSkill = 0;
-
-
-
-            foreach (Member m in HeistTeam.Members)
+            while (trials > 0)
             {
-                teamSkill = teamSkill + m.Skill;
-            }
+                int BankDiffLevel = Diff;
+                Random Luck = new Random();
+                int teamLuck = Luck.Next(-10, 10);
+                BankDiffLevel = 100 + teamLuck;
 
-            if (teamSkill >= BankDiffLevel)
-            {
-                Console.WriteLine($"Your heist team's combined skill level is {teamSkill}");
-                Console.WriteLine($"The bank's difficulty level is {BankDiffLevel}.....");
-                Console.WriteLine("Sucess, you done did it!");
-            }
-            else
-            {
-                Console.WriteLine($"Your heist team's combined skill level is {teamSkill}");
-                Console.WriteLine($"The bank's difficulty level is {BankDiffLevel}.....");
-                Console.WriteLine("You in jail");
-            }
+                int teamSkill = 0;
 
+                foreach (Member m in HeistTeam.Members)
+                {
+                    teamSkill = teamSkill + m.Skill;
+                }
+
+                if (teamSkill >= BankDiffLevel)
+                {
+                    Console.WriteLine($"Your heist team's combined skill level is {teamSkill}");
+                    Console.WriteLine($"The bank's difficulty level is {BankDiffLevel}.....");
+                    Console.WriteLine("Sucess, you done did it!");
+                    success = success + 1;
+                }
+                else
+                {
+                    Console.WriteLine($"Your heist team's combined skill level is {teamSkill}");
+                    Console.WriteLine($"The bank's difficulty level is {BankDiffLevel}.....");
+                    Console.WriteLine("You in jail");
+                    success = success - 1;
+                }
+                trials = trials - 1;
+            }
+            Console.Clear();
+            Console.WriteLine($"You have successfully robbed {success} banks!");
+            Console.WriteLine("Care to try again?  [y/n]");
+            Console.Write(">");
+            string again = Console.ReadLine();
+            if (again == "y")
+            {
+                Main();
+            }
 
         }
     }
