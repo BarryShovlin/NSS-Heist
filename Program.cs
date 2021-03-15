@@ -34,12 +34,27 @@ namespace Heist
                     string MemberSkill = Console.ReadLine();
                     int skill = Int32.Parse(MemberSkill);
 
-                    Console.Write($"Enter {name}'s courage factor (0.0-2.0): ");
-                    string courageFactor = Console.ReadLine();
-                    decimal courage = Decimal.Parse(courageFactor);
+                    decimal Courage()
+                    {
+                        Console.Write($"Enter {name}'s courage factor (0.0-2.0): ");
+                        string courageFactor = Console.ReadLine();
+                        decimal courage = Decimal.Parse(courageFactor);
+                        if (courage > 2)
+                        {
+                            Console.WriteLine("You aren't that corageous!");
+                            Courage();
+                            return courage;
+                        }
+                        else
+                        {
+                            return courage;
+                        }
+                    }
+
+                    decimal returnedCourage = Courage();
 
 
-                    Member member = new Member(name, skill, courage);
+                    Member member = new Member(name, skill, returnedCourage);
                     HeistTeam.AddMember(member);
 
                     // Console.WriteLine(name);
@@ -64,8 +79,13 @@ namespace Heist
                 }
             }
             int BankDiffLevel = 100;
+            Random Luck = new Random();
+            int teamLuck = Luck.Next(-10, 10);
+            BankDiffLevel = 100 + teamLuck;
 
             int teamSkill = 0;
+
+
 
             foreach (Member m in HeistTeam.Members)
             {
@@ -74,10 +94,14 @@ namespace Heist
 
             if (teamSkill >= BankDiffLevel)
             {
+                Console.WriteLine($"Your heist team's combined skill level is {teamSkill}");
+                Console.WriteLine($"The bank's difficulty level is {BankDiffLevel}.....");
                 Console.WriteLine("Sucess, you done did it!");
             }
             else
             {
+                Console.WriteLine($"Your heist team's combined skill level is {teamSkill}");
+                Console.WriteLine($"The bank's difficulty level is {BankDiffLevel}.....");
                 Console.WriteLine("You in jail");
             }
 
