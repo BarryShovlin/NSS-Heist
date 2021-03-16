@@ -52,25 +52,15 @@ namespace Heist
 
             while (planning)
             {
-                string NameSet()
+                Console.WriteLine("Enter 'done' if finished adding team members");
+                Console.Write("Enter a team member's name: ");
+                string name = Console.ReadLine();
+                if (name == "done")
                 {
-                    Console.Write("Enter a team member's name: ");
-                    string name = Console.ReadLine();
-                    Console.WriteLine("Add another burgalar?  [y/n]");
-                    string addMore = Console.ReadLine();
-                    if (addMore == "y")
-                    {
-                        NameSet();
-                        return name;
-                    }
-                    else
-                    {
-                        planning = false;
-                        return name;
-                    }
-                    string setName = NameSet();
-
-
+                    planning = false;
+                }
+                else
+                {
 
                     int Skillset()
                     {
@@ -123,9 +113,7 @@ namespace Heist
 
                     Member member = new Member(name, skill, returnedCourage);
                     HeistTeam.AddMember(member);
-
                 }
-
             }
             Console.Clear();
             Console.WriteLine("How many banks you looking to rob today?");
@@ -216,6 +204,7 @@ namespace Heist
         }
     }
 }
+
 
 
 
