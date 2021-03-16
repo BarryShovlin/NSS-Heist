@@ -11,38 +11,41 @@ namespace Heist
 
             Team HeistTeam = new Team();
             int Diff = 0;
-
-            Console.WriteLine("Choose your difficulty");
-            Console.WriteLine("[1] Cake Walk, [2] A Little Sweat, [3] Shouldn't Try This, [4] Daniel Ocean Wouldn't Even Think About It");
-            string playerInput = Console.ReadLine();
-            try
+            Difficulty();
+            void Difficulty()
             {
-                int input = Int32.Parse(playerInput);
-                if (input == 1)
+                Console.WriteLine("Choose your difficulty");
+                Console.WriteLine("[1] Cake Walk, [2] A Little Sweat, [3] Shouldn't Try This, [4] Daniel Ocean Wouldn't Even Think About It");
+                string playerInput = Console.ReadLine();
+                try
                 {
-                    Diff = 50;
+                    int input = Int32.Parse(playerInput);
+                    if (input == 1)
+                    {
+                        Diff = 50;
+                    }
+                    else if (input == 2)
+                    {
+                        Diff = 100;
+                    }
+                    else if (input == 3)
+                    {
+                        Diff = 150;
+                    }
+                    else if (input == 4)
+                    {
+                        Diff = 500;
+                    }
+                    else
+                    {
+                        Difficulty();
+                    }
                 }
-                else if (input == 2)
+                catch (Exception)
                 {
-                    Diff = 100;
-                }
-                else if (input == 3)
-                {
-                    Diff = 150;
-                }
-                else if (input == 4)
-                {
-                    Diff = 500;
-                }
-                else
-                {
+                    Console.WriteLine($"Please enter a valid choice");
                     Main();
                 }
-            }
-            catch (Exception)
-            {
-                Console.WriteLine($"Please enter a valid choice");
-                Main();
             }
 
             Console.WriteLine("Plan your heist!");
@@ -52,68 +55,73 @@ namespace Heist
 
             while (planning)
             {
-                Console.WriteLine("Enter 'done' if finished adding team members");
                 Console.Write("Enter a team member's name: ");
                 string name = Console.ReadLine();
-                if (name == "done")
+
+                int Skillset()
                 {
-                    planning = false;
+                    Console.Write($"Enter {name}'s skill level (number): ");
+                    string MemberSkill = Console.ReadLine();
+                    try
+                    {
+                        int skill = Int32.Parse(MemberSkill);
+                        return skill;
+                    }
+                    catch (Exception)
+                    {
+                        Console.WriteLine($"Please enter a number");
+                        Skillset();
+                        return 0;
+                    }
+                }
+                int skill = Skillset();
+
+
+                decimal Courage()
+                {
+                    Console.Write($"Enter {name}'s courage factor (0.0-2.0): ");
+                    string courageFactor = Console.ReadLine();
+
+                    try
+                    {
+                        decimal courage = Decimal.Parse(courageFactor);
+                        if (courage > 2)
+                        {
+                            Console.WriteLine($"{name} isn't that corageous!");
+                            Courage();
+                            return courage;
+                        }
+                        else
+                        {
+                            return courage;
+                        }
+                    }
+                    catch (Exception ex)
+                    {
+                        Console.WriteLine($"Enter any number between 0.0 and 2.0.  {ex.Message}");
+                        Courage();
+                        return 0;
+                    }
+                }
+
+                decimal returnedCourage = Courage();
+
+
+                Member member = new Member(name, skill, returnedCourage);
+                HeistTeam.AddMember(member);
+
+                Console.WriteLine("Add another member? [y/n]");
+                string addOn = Console.ReadLine();
+                if (addOn == "y")
+                {
+                    planning = true;
+
                 }
                 else
                 {
-
-                    int Skillset()
-                    {
-                        Console.Write($"Enter {name}'s skill level (number): ");
-                        string MemberSkill = Console.ReadLine();
-                        try
-                        {
-                            int skill = Int32.Parse(MemberSkill);
-                            return skill;
-                        }
-                        catch (Exception)
-                        {
-                            Console.WriteLine($"Please enter a number");
-                            Skillset();
-                            return 0;
-                        }
-                    }
-                    int skill = Skillset();
-
-
-                    decimal Courage()
-                    {
-                        Console.Write($"Enter {name}'s courage factor (0.0-2.0): ");
-                        string courageFactor = Console.ReadLine();
-
-                        try
-                        {
-                            decimal courage = Decimal.Parse(courageFactor);
-                            if (courage > 2)
-                            {
-                                Console.WriteLine($"{name} isn't that corageous!");
-                                Courage();
-                                return courage;
-                            }
-                            else
-                            {
-                                return courage;
-                            }
-                        }
-                        catch (Exception ex)
-                        {
-                            Console.WriteLine($"Enter any number between 0.0 and 2.0.  {ex.Message}");
-                            Courage();
-                            return 0;
-                        }
-                    }
-
-                    decimal returnedCourage = Courage();
-
-
-                    Member member = new Member(name, skill, returnedCourage);
-                    HeistTeam.AddMember(member);
+                    planning = false;
                 }
+
             }
             Console.Clear();
             Console.WriteLine("How many banks you looking to rob today?");
